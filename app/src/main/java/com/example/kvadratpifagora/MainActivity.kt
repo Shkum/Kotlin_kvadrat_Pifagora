@@ -48,11 +48,11 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
-            R.id.mnu_Search  -> {
-                val intent = Intent(this, ActivitySearch::class.java)
-                startActivity(intent)
-                true
-            }
+//            R.id.mnu_Search  -> {
+//                val intent = Intent(this, ActivitySearch::class.java)
+//                startActivity(intent)
+//                true
+//            }
 
             else -> super.onOptionsItemSelected(item)
         }
