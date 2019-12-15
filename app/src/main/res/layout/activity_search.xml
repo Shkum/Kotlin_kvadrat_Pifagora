@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_dynamic"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -32,7 +32,7 @@
         android:hint="Начальная дата: ДеньМесяцГод (пример: 31121999)"
         android:inputType="number"
         android:maxLength="8"
-        android:text=""
+        android:text="31121950"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,8 +40,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="31121950" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTxt4"
@@ -89,7 +88,7 @@
         android:hint="Конечная дата: ДеньМесяцГод (пример: 31121999)"
         android:inputType="number"
         android:maxLength="8"
-        android:text=""
+        android:text="31121999"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -322,20 +321,19 @@
         app:layout_constraintVertical_bias="0.039" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSerchStart"
         android:layout_width="130dp"
         android:layout_height="69dp"
-        android:layout_marginTop="68dp"
         android:text="Начать поиск дат"
         app:layout_constraintBottom_toTopOf="@+id/btnSearchBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxt3"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintVertical_bias="0.133" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnSearchEnd"
         android:layout_width="130dp"
         android:layout_height="69dp"
         android:text="остановить поиск дат"
@@ -343,16 +341,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/btnSerchStart"
         app:layout_constraintVertical_bias="0.175" />
 
     <ListView
+        android:id="@+id/lstDate"
         android:layout_width="231dp"
         android:layout_height="411dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintStart_toEndOf="@+id/btnSearchEnd"
         app:layout_constraintTop_toBottomOf="@+id/editTxt6"
         app:layout_constraintVertical_bias="0.197" />
 
