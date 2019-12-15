@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/mnu_Brak"
+        android:orderInCategory="100"
+        android:title="@string/sovmBrak"
+        />
+
+    <item
+        android:id="@+id/mnu_PolnOpis"
+        android:orderInCategory="100"
+        android:title="@string/FullDescript"
+        />
+
+    <item
+        android:id="@+id/mnu_Search"
+        android:orderInCategory="100"
+        android:title="@string/Srch"
+        />
+
+    <item
+        android:id="@+id/mnu_About"
+        android:orderInCategory="100"
+        android:title="@string/mnuAbout"
+        />
+    <item
+        android:id="@+id/mnu_Exit"
+        android:orderInCategory="100"
+        android:title="@string/mnuExit"
+        />
+
+</menu>
