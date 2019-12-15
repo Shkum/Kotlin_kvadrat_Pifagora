@@ -14,15 +14,17 @@ class ActivitySearch : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
 
-        fun onClick(view: View) {
-            val b = view as Button
-            when (b.id) {
-                R.id.btnSearchBack -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
 
+        }
+
+    fun onClick(view: View) {
+        val b = view as Button
+        when (b.id) {
+            R.id.btnSearchBack -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
+
         }
 
     }
