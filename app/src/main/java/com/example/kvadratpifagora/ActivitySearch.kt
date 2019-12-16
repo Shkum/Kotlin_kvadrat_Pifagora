@@ -41,7 +41,7 @@ class ActivitySearch : AppCompatActivity() {
 
         }
 
-
+        editDateStart.requestFocus()
     }
 
 
@@ -170,7 +170,7 @@ class ActivitySearch : AppCompatActivity() {
         dDate2 = "$dd.$mm.$yy"
 
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
+        if (imm.isActive) imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
 
         if (editDateStart.length() == 8 && editDateEnd.length() == 8 && validDate1.isValidDate(dDate1) && validDate2.isValidDate(dDate2)) {
 
