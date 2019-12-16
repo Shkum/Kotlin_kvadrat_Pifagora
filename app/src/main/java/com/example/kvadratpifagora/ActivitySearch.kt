@@ -185,24 +185,6 @@ class ActivitySearch : AppCompatActivity() {
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//           val thread = Thread {
-//               println("test")
-//               while (dteCompare(dDate, dDate2) && searchFlag) {
-//
-//                   if (ProverkaSovpadeniy(dDate)) {
-//                       strDates.add(0, dDate)
-//                       adapter.notifyDataSetChanged()
-//                   }
-//                   dDate = dteIncrement(dDate)
-//                   textView7.text = calcStatus(dDate1, dDate2, dDate)
-//               }
-//
-//           }
-//
-//           thread.start()
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////
-
             while (dteCompare(dDate, dDate2) && searchFlag) {
 
                 if (ProverkaSovpadeniy(dDate)) {
@@ -212,6 +194,7 @@ class ActivitySearch : AppCompatActivity() {
                 dDate = dteIncrement(dDate)
                 textView7.text = calcStatus(dDate1, dDate2, dDate)
             }
+
             btnSearchStart.isEnabled = true
 
         }

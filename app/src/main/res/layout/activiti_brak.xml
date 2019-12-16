@@ -202,16 +202,15 @@
         android:id="@+id/txt29"
         android:layout_width="63dp"
         android:layout_height="17dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/txt_border"
         android:text="9"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toEndOf="@+id/txt26"
         app:layout_constraintTop_toBottomOf="@+id/txt28"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
         android:id="@+id/txt27"
@@ -279,10 +278,10 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintHorizontal_bias="0.349"
         app:layout_constraintStart_toEndOf="@+id/txt23"
         app:layout_constraintTop_toBottomOf="@+id/txt25"
-        app:layout_constraintVertical_bias="0.045" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txt21"
@@ -326,7 +325,7 @@
         app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt22"
-        app:layout_constraintVertical_bias="0.045" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -425,10 +424,10 @@
         android:textAlignment="textStart"
         app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@id/txtZenaDuh"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintVertical_bias="0.065" />
 
     <View
         android:id="@+id/divider"
@@ -524,10 +523,10 @@
         android:textAlignment="textStart"
         app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.383"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toEndOf="@+id/textView20"
         app:layout_constraintTop_toBottomOf="@+id/txtBit"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintVertical_bias="0.072" />
 
     <View
         android:id="@+id/divider2"
