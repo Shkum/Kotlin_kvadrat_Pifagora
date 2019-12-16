@@ -3,10 +3,13 @@ package com.example.kvadratpifagora
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_search.*
@@ -14,12 +17,30 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.round
 
+
 class ActivitySearch : AppCompatActivity() {
     var searchFlag: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        lstDate.onItemClickListener = OnItemClickListener { parent, itemClicked, position, id ->
+            var getDte: String = (itemClicked as TextView).text.toString()
+            getDte = getDte.replace(".", "")
+            val pifagor = Pifagor()
+            pifagor.pifCalc(getDte)
+            editTxt1.setText(pifagor.edinici)
+            editTxt2.setText(pifagor.dvoyki)
+            editTxt3.setText(pifagor.troyki)
+            editTxt4.setText(pifagor.chetverki)
+            editTxt5.setText(pifagor.pyaterki)
+            editTxt6.setText(pifagor.shesterki)
+            editTxt7.setText(pifagor.semerki)
+            editTxt8.setText(pifagor.vosmerki)
+            editTxt9.setText(pifagor.devyatki)
+
+        }
 
 
     }
