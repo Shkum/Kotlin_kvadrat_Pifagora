@@ -166,8 +166,8 @@ class ActivitySearch : AppCompatActivity() {
                     strDates.add(0, dDate)
                     adapter.notifyDataSetChanged()
                 }
-                textView7.text = calcStatus(dDate1, dDate2, dDate)
                 dDate = dteIncrement(dDate)
+                textView7.text = calcStatus(dDate1, dDate2, dDate)
             }
         }
 
@@ -202,11 +202,12 @@ class ActivitySearch : AppCompatActivity() {
         val dte3: Date = sdf.parse(currentdate)
         val dateDiff: Long = ((dte2.time - dte1.time) / 60 / 60 / 24 / 1000)
         val dateDiffCurrent: Long = ((dte2.time - dte3.time) / 60 / 60 / 24 / 1000)
-        var res: Double = (dateDiff.toDouble() - dateDiffCurrent.toDouble()) / dateDiff.toDouble()
+        var result: Double = (dateDiff.toDouble() - dateDiffCurrent.toDouble()) / dateDiff.toDouble()
 
-        res=round(res*10.0)/10.0
+        result = round(result * 10.0) / 10.0
 
-        return (res * 100).toString() + " %"
+        return (result * 100).toString() + " %"
     }
+
 
 }
