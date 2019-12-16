@@ -231,6 +231,7 @@ class MainActivity : AppCompatActivity() {
 
 
                         button10.isEnabled = true
+
                     }
                     //Меняем подписи текста и кнопок на стандартные, если дата неправильная
                 } else {

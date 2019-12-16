@@ -32,7 +32,7 @@
         android:hint="Начальная дата: ДеньМесяцГод (пример: 31121999)"
         android:inputType="number"
         android:maxLength="8"
-        android:text="31121982"
+        android:text="24121982"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -88,7 +88,7 @@
         android:hint="Конечная дата: ДеньМесяцГод (пример: 31121999)"
         android:inputType="number"
         android:maxLength="8"
-        android:text="31121999"
+        android:text="28121982"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -357,5 +357,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSerchStart"
         app:layout_constraintVertical_bias="0.463" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSearchEnd"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toEndOf="@+id/btnSerchStart"
+        app:layout_constraintTop_toBottomOf="@+id/editTxt6"
+        app:layout_constraintVertical_bias="0.081" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

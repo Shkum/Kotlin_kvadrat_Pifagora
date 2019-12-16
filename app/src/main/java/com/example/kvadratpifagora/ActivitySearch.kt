@@ -12,9 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_search.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.round
 
 class ActivitySearch : AppCompatActivity() {
-var searchFlag: Boolean=false
+    var searchFlag: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,12 +85,13 @@ var searchFlag: Boolean=false
         val b = view as Button
         when (b.id) {
             R.id.btnSearchBack -> {
+                searchFlag = false
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
 
             R.id.btnSerchStart -> {
-                btnSerchStart.isEnabled=false
+                btnSerchStart.isEnabled = false
 
                 val valDate = isDateExist()
                 val lenght1 = checkLenght(editDateStart.text.toString())
@@ -112,13 +114,14 @@ var searchFlag: Boolean=false
                         StartSearch()
                     } else wrongDate()
                 } else wrongDate()
-                btnSerchStart.isEnabled=true
+                btnSerchStart.isEnabled = true
 
             }
 
-            R.id.btnSearchEnd -> {7
-                searchFlag=false
-                btnSerchStart.isEnabled=true
+            R.id.btnSearchEnd -> {
+
+                searchFlag = false
+                btnSerchStart.isEnabled = true
             }
 
         }
@@ -156,18 +159,19 @@ var searchFlag: Boolean=false
 
 
             dDate = dDate1
-            searchFlag=true
+            searchFlag = true
             while (dteCompare(dDate, dDate2) && searchFlag) {
 
                 if (ProverkaSovpadeniy(dDate)) {
                     strDates.add(0, dDate)
                     adapter.notifyDataSetChanged()
                 }
+                textView7.text = calcStatus(dDate1, dDate2, dDate)
                 dDate = dteIncrement(dDate)
             }
-
         }
-        searchFlag=false
+
+        searchFlag = false
     }
 
     fun dteIncrement(str: String): String {
@@ -182,13 +186,27 @@ var searchFlag: Boolean=false
         val sdf = SimpleDateFormat("dd.MM.yyyy")
         val dte1: Date = sdf.parse(date1)
         val dte2: Date = sdf.parse(date2)
-
+        println((dte2.time - dte1.time) / 60 / 60 / 24 / 1000)
         return dte1.time < dte2.time
     }
 
     fun wrongDate() {
         val msg: Toast = Toast.makeText(applicationContext, "НЕПРАВИЛЬНАЯ ДАТА", Toast.LENGTH_LONG)
         msg.show()
+    }
+
+    fun calcStatus(startdate: String, enddate: String, currentdate: String): String {
+        val sdf = SimpleDateFormat("dd.MM.yyyy")
+        val dte1: Date = sdf.parse(startdate)
+        val dte2: Date = sdf.parse(enddate)
+        val dte3: Date = sdf.parse(currentdate)
+        val dateDiff: Long = ((dte2.time - dte1.time) / 60 / 60 / 24 / 1000)
+        val dateDiffCurrent: Long = ((dte2.time - dte3.time) / 60 / 60 / 24 / 1000)
+        var res: Double = (dateDiff.toDouble() - dateDiffCurrent.toDouble()) / dateDiff.toDouble()
+
+        res=round(res*10.0)/10.0
+
+        return (res * 100).toString() + " %"
     }
 
 }
