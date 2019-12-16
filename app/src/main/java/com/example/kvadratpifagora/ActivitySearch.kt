@@ -3,7 +3,6 @@ package com.example.kvadratpifagora
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView.OnItemClickListener
@@ -46,7 +45,7 @@ class ActivitySearch : AppCompatActivity() {
     }
 
 
-    fun ProverkaSovpadeniy(string: String): Boolean {
+    private fun ProverkaSovpadeniy(string: String): Boolean {
 
         var c1 = false
         var c2 = false
@@ -63,14 +62,14 @@ class ActivitySearch : AppCompatActivity() {
         pifagor.pifCalc(string.replace(".", ""))
 
         if (check1.isChecked && editTxt1.text.length == pifagor.edinici.length) c1 = true
-        if (check2.isChecked && editTxt1.text.length == pifagor.dvoyki.length) c2 = true
-        if (check3.isChecked && editTxt1.text.length == pifagor.troyki.length) c3 = true
-        if (check4.isChecked && editTxt1.text.length == pifagor.chetverki.length) c4 = true
-        if (check5.isChecked && editTxt1.text.length == pifagor.pyaterki.length) c5 = true
-        if (check6.isChecked && editTxt1.text.length == pifagor.shesterki.length) c6 = true
-        if (check7.isChecked && editTxt1.text.length == pifagor.semerki.length) c7 = true
-        if (check8.isChecked && editTxt1.text.length == pifagor.vosmerki.length) c8 = true
-        if (check9.isChecked && editTxt1.text.length == pifagor.devyatki.length) c9 = true
+        if (check2.isChecked && editTxt2.text.length == pifagor.dvoyki.length) c2 = true
+        if (check3.isChecked && editTxt3.text.length == pifagor.troyki.length) c3 = true
+        if (check4.isChecked && editTxt4.text.length == pifagor.chetverki.length) c4 = true
+        if (check5.isChecked && editTxt5.text.length == pifagor.pyaterki.length) c5 = true
+        if (check6.isChecked && editTxt6.text.length == pifagor.shesterki.length) c6 = true
+        if (check7.isChecked && editTxt7.text.length == pifagor.semerki.length) c7 = true
+        if (check8.isChecked && editTxt8.text.length == pifagor.vosmerki.length) c8 = true
+        if (check9.isChecked && editTxt9.text.length == pifagor.devyatki.length) c9 = true
 
         if (!check1.isChecked) c1 = true
         if (!check2.isChecked) c2 = true
@@ -86,7 +85,7 @@ class ActivitySearch : AppCompatActivity() {
 
     }
 
-    fun checkLenght(str: String): Boolean {
+    private fun checkLenght(str: String): Boolean {
         return str.length == 8
     }
 
@@ -111,8 +110,8 @@ class ActivitySearch : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            R.id.btnSerchStart -> {
-                btnSerchStart.isEnabled = false
+            R.id.btnSearchStart -> {
+                btnSearchStart.isEnabled = false
 
                 val valDate = isDateExist()
                 val lenght1 = checkLenght(editDateStart.text.toString())
@@ -132,23 +131,25 @@ class ActivitySearch : AppCompatActivity() {
                     dte2 = "$dd.$mm.$yy"
                     val valDte2 = valDate.isValidDate(dte2)
                     if (valDte1 && valDte2) {
+
                         StartSearch()
+
                     } else wrongDate()
                 } else wrongDate()
-                btnSerchStart.isEnabled = true
+
 
             }
 
             R.id.btnSearchEnd -> {
 
                 searchFlag = false
-                btnSerchStart.isEnabled = true
+                btnSearchStart.isEnabled = true
             }
 
         }
     }
 
-    fun StartSearch() {
+    private fun StartSearch() {
 
         val validDate1 = isDateExist()
         val validDate2 = isDateExist()
@@ -176,11 +177,32 @@ class ActivitySearch : AppCompatActivity() {
             val strDates: ArrayList<String> = ArrayList()
             val adapter: ArrayAdapter<String>
             adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, strDates)
-            lstDate.setAdapter(adapter)
+            lstDate.adapter = adapter
 
 
             dDate = dDate1
             searchFlag = true
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//           val thread = Thread {
+//               println("test")
+//               while (dteCompare(dDate, dDate2) && searchFlag) {
+//
+//                   if (ProverkaSovpadeniy(dDate)) {
+//                       strDates.add(0, dDate)
+//                       adapter.notifyDataSetChanged()
+//                   }
+//                   dDate = dteIncrement(dDate)
+//                   textView7.text = calcStatus(dDate1, dDate2, dDate)
+//               }
+//
+//           }
+//
+//           thread.start()
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+
             while (dteCompare(dDate, dDate2) && searchFlag) {
 
                 if (ProverkaSovpadeniy(dDate)) {
@@ -190,33 +212,34 @@ class ActivitySearch : AppCompatActivity() {
                 dDate = dteIncrement(dDate)
                 textView7.text = calcStatus(dDate1, dDate2, dDate)
             }
+            btnSearchStart.isEnabled = true
+
         }
 
         searchFlag = false
     }
 
-    fun dteIncrement(str: String): String {
+    private fun dteIncrement(str: String): String {
         val dte: Calendar = Calendar.getInstance()
-        val sdf: SimpleDateFormat = SimpleDateFormat("dd.MM.yyyy")
-        dte.setTime(sdf.parse(str))
+        val sdf = SimpleDateFormat("dd.MM.yyyy")
+        dte.time = sdf.parse(str)
         dte.add(Calendar.DATE, 1)
-        return sdf.format(dte.getTime()).toString()
+        return sdf.format(dte.time).toString()
     }
 
     private fun dteCompare(date1: String, date2: String): Boolean {
         val sdf = SimpleDateFormat("dd.MM.yyyy")
         val dte1: Date = sdf.parse(date1)
         val dte2: Date = sdf.parse(date2)
-        println((dte2.time - dte1.time) / 60 / 60 / 24 / 1000)
         return dte1.time < dte2.time
     }
 
-    fun wrongDate() {
+    private fun wrongDate() {
         val msg: Toast = Toast.makeText(applicationContext, "НЕПРАВИЛЬНАЯ ДАТА", Toast.LENGTH_LONG)
         msg.show()
     }
 
-    fun calcStatus(startdate: String, enddate: String, currentdate: String): String {
+    private fun calcStatus(startdate: String, enddate: String, currentdate: String): String {
         val sdf = SimpleDateFormat("dd.MM.yyyy")
         val dte1: Date = sdf.parse(startdate)
         val dte2: Date = sdf.parse(enddate)
