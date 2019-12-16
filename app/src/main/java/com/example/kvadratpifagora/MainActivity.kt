@@ -231,6 +231,8 @@ class MainActivity : AppCompatActivity() {
 
 
                         button10.isEnabled = true
+                        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        if (txtBirthDay.hasFocus()) imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
 
                     }
                     //Меняем подписи текста и кнопок на стандартные, если дата неправильная
