@@ -38,7 +38,8 @@ class ActivitySearch : AppCompatActivity() {
             editTxt7.setText(pifagor.semerki)
             editTxt8.setText(pifagor.vosmerki)
             editTxt9.setText(pifagor.devyatki)
-
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            if (imm.isActive) imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
         }
 
         editDateStart.requestFocus()
