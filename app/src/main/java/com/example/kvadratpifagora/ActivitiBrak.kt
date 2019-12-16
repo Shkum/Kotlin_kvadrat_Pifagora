@@ -54,7 +54,7 @@ class ActivitiBrak : AppCompatActivity() {
                         txt11.text = pifagor.edinici
                         txt12.text = pifagor.dvoyki
                         txt13.text = pifagor.troyki
-                        txt14.text = pifagor.cheverki
+                        txt14.text = pifagor.chetverki
                         txt15.text = pifagor.pyaterki
                         txt16.text = pifagor.shesterki
                         txt17.text = pifagor.semerki
@@ -127,7 +127,7 @@ class ActivitiBrak : AppCompatActivity() {
                         txt21.text = pifagor.edinici
                         txt22.text = pifagor.dvoyki
                         txt23.text = pifagor.troyki
-                        txt24.text = pifagor.cheverki
+                        txt24.text = pifagor.chetverki
                         txt25.text = pifagor.pyaterki
                         txt26.text = pifagor.shesterki
                         txt27.text = pifagor.semerki

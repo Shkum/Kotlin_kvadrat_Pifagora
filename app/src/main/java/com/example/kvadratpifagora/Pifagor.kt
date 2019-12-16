@@ -16,7 +16,7 @@ class Pifagor {
     var edinici: String = ""
     var dvoyki: String = ""
     var troyki: String = ""
-    var cheverki: String = ""
+    var chetverki: String = ""
     var pyaterki: String = ""
     var shesterki: String = ""
     var semerki: String = ""
@@ -87,7 +87,7 @@ class Pifagor {
         for (i in 0 until cPolnoeChislo.length - cPolnoeChislo.replace("4".toRegex(), "").length) {
             cName += "4"
         }
-        cheverki = cName
+        chetverki = cName
 
         cName = ""
         for (i in 0 until cPolnoeChislo.length - cPolnoeChislo.replace("5".toRegex(), "").length) {
@@ -121,9 +121,9 @@ class Pifagor {
 
         //Расчет строк, столбцов и диагоналей
         stolbec1 = (edinici.length + dvoyki.length + troyki.length)
-        stolbec2 = (cheverki.length + pyaterki.length + shesterki.length)
+        stolbec2 = (chetverki.length + pyaterki.length + shesterki.length)
         stolbec3 = (semerki.length + vosmerki.length + devyatki.length)
-        stroka1 = (edinici.length + cheverki.length + semerki.length)
+        stroka1 = (edinici.length + chetverki.length + semerki.length)
         stroka2 = (dvoyki.length + pyaterki.length + vosmerki.length)
         stroka3 = (troyki.length + shesterki.length + devyatki.length)
         duhovnayaDiagonal = (edinici.length + pyaterki.length + devyatki.length)

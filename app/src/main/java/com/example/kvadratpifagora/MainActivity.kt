@@ -1,7 +1,6 @@
 package com.example.kvadratpifagora
 
 import android.app.AlertDialog
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -68,9 +67,10 @@ class MainActivity : AppCompatActivity() {
 
     fun onClick(view: View) {
         val b = view as Button
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
 
         //убираем клавиатуру если поле ввода потеряло фокус
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         if (txtBirthDay.hasFocus()) imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
 
         // Снимаем фокус с поля ввода и проматываем TextView на начало
@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity() {
                         btn1.text = pifagor.edinici
                         btn2.text = pifagor.dvoyki
                         btn3.text = pifagor.troyki
-                        btn4.text = pifagor.cheverki
+                        btn4.text = pifagor.chetverki
                         btn5.text = pifagor.pyaterki
                         btn6.text = pifagor.shesterki
                         btn7.text = pifagor.semerki
