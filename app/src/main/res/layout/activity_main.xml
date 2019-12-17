@@ -185,6 +185,7 @@
         android:layout_marginEnd="4dp"
         android:scrollbars="vertical"
         android:textColor="?attr/textColorAlertDialogListItem"
+        android:textSize="18sp"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintHorizontal_bias="0.25"
         ads:layout_constraintTop_toBottomOf="@+id/txtStolb2"
@@ -209,7 +210,7 @@
         android:id="@+id/txtStolb1"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
+        android:layout_marginStart="32dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_green_light"
         android:clickable="true"
@@ -217,7 +218,9 @@
         android:text="-"
         android:textAlignment="center"
         ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.0"
+        ads:layout_constraintStart_toEndOf="@+id/txtPlotskayaDiagonal"
         ads:layout_constraintTop_toBottomOf="@+id/btn3"
         ads:layout_constraintVertical_bias="0.0" />
 
@@ -233,6 +236,8 @@
         android:text="-"
         android:textAlignment="center"
         ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toEndOf="@+id/txtStolb1"
         ads:layout_constraintTop_toBottomOf="@+id/btn6"
         ads:layout_constraintVertical_bias="0.0" />
@@ -249,9 +254,11 @@
         android:text="-"
         android:textAlignment="center"
         ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toEndOf="@+id/txtStolb2"
         ads:layout_constraintTop_toBottomOf="@+id/btn9"
-        ads:layout_constraintVertical_bias="0.001" />
+        ads:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtStroka1"
@@ -264,10 +271,12 @@
         android:onClick="txtClick"
         android:text="-"
         android:textAlignment="center"
+        ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toEndOf="@+id/btn7"
-        ads:layout_constraintTop_toTopOf="parent" />
+        ads:layout_constraintTop_toTopOf="parent"
+        ads:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtStroka2"
@@ -280,10 +289,12 @@
         android:onClick="txtClick"
         android:text="-"
         android:textAlignment="center"
+        ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toEndOf="@+id/btn8"
-        ads:layout_constraintTop_toBottomOf="@+id/txtStroka1" />
+        ads:layout_constraintTop_toBottomOf="@+id/txtStroka1"
+        ads:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtStroka3"
@@ -296,22 +307,25 @@
         android:onClick="txtClick"
         android:text="-"
         android:textAlignment="center"
+        ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toEndOf="@+id/btn9"
-        ads:layout_constraintTop_toBottomOf="@+id/txtStroka2" />
+        ads:layout_constraintTop_toBottomOf="@+id/txtStroka2"
+        ads:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtDuhovnayaDiagonal"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:background="@android:color/holo_green_light"
         android:clickable="true"
         android:onClick="txtClick"
         android:text="-"
         android:textAlignment="center"
-        ads:layout_constraintStart_toEndOf="@+id/btn7"
-        ads:layout_constraintTop_toTopOf="@+id/txtStolb3" />
+        ads:layout_constraintStart_toEndOf="@+id/txtStolb3"
+        ads:layout_constraintTop_toBottomOf="@+id/btn9" />
 
     <TextView
         android:id="@+id/txtPlotskayaDiagonal"
@@ -323,20 +337,24 @@
         android:onClick="txtClick"
         android:text="-"
         android:textAlignment="center"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toBottomOf="@+id/btn3" />
+        ads:layout_constraintTop_toBottomOf="@+id/btn3"
+        ads:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="txtClick"
-        android:text="Воплощение - "
+        android:text="Воплощение -"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/txtStroka1"
         ads:layout_constraintTop_toBottomOf="@+id/txtBirthDay" />
 
@@ -344,13 +362,13 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="txtClick"
         android:text="1е число -"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/txtStroka1"
         ads:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -358,13 +376,13 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="txtClick"
-        android:text="2е число - "
+        android:text="2е число -"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/txtStroka2"
         ads:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -372,13 +390,13 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="txtClick"
-        android:text="3е число - "
+        android:text="3е число -"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/txtStroka2"
         ads:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -386,13 +404,13 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="txtClick"
-        android:text="4е число - "
+        android:text="4е число -"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/txtStroka2"
         ads:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -407,7 +425,7 @@
         android:text="-"
         android:textAlignment="center"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/textView11"
         ads:layout_constraintTop_toBottomOf="@+id/txtBirthDay" />
 
@@ -416,13 +434,13 @@
         android:layout_width="15dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="txtClick"
         android:text="-"
         android:textAlignment="center"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/textView12"
         ads:layout_constraintTop_toBottomOf="@+id/txtVoploshenie" />
 
@@ -431,13 +449,13 @@
         android:layout_width="15dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="txtClick"
         android:text="-"
         android:textAlignment="center"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/textView13"
         ads:layout_constraintTop_toBottomOf="@+id/txtChislo1" />
 
@@ -445,14 +463,14 @@
         android:id="@+id/txtChislo3"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="txtClick"
         android:text="-"
         android:textAlignment="center"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/textView14"
         ads:layout_constraintTop_toBottomOf="@+id/txtChislo2" />
 
@@ -460,14 +478,14 @@
         android:id="@+id/txtChislo4"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:onClick="txtClick"
         android:text="-"
         android:textAlignment="center"
         android:textColor="?attr/editTextColor"
-        android:textSize="8sp"
+        android:textSize="10sp"
         ads:layout_constraintStart_toEndOf="@+id/textView15"
         ads:layout_constraintTop_toBottomOf="@+id/txtChislo3" />
 

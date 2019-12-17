@@ -26,6 +26,7 @@ class ActivitySearch : AppCompatActivity() {
 
         lstDate.onItemClickListener = OnItemClickListener { parent, itemClicked, position, id ->
             var getDte: String = (itemClicked as TextView).text.toString()
+            textView8.text=getDte
             getDte = getDte.replace(".", "")
             val pifagor = Pifagor()
             pifagor.pifCalc(getDte)
@@ -40,6 +41,7 @@ class ActivitySearch : AppCompatActivity() {
             editTxt9.setText(pifagor.devyatki)
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             if (imm.isActive) imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
+
         }
 
         editDateStart.requestFocus()

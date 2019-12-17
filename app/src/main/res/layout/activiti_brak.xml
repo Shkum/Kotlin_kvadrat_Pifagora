@@ -278,7 +278,7 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.349"
+        app:layout_constraintHorizontal_bias="0.345"
         app:layout_constraintStart_toEndOf="@+id/txt23"
         app:layout_constraintTop_toBottomOf="@+id/txt25"
         app:layout_constraintVertical_bias="0.0" />
@@ -354,20 +354,19 @@
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="17dp"
         android:text="Духовная стабильность жены"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt23"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txt26"
+        app:layout_constraintVertical_bias="0.042" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="17dp"
         android:layout_marginTop="8dp"
         android:text="Бытовая стабильность жены"
         app:layout_constraintBottom_toTopOf="@+id/btnBack"
@@ -411,10 +410,10 @@
         android:textAlignment="textStart"
         app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/txt26"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.049" />
 
     <TextView
         android:id="@+id/txtZenaBit"
@@ -424,10 +423,10 @@
         android:textAlignment="textStart"
         app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintHorizontal_bias="0.181"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@id/txtZenaDuh"
-        app:layout_constraintVertical_bias="0.065" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.047" />
 
     <View
         android:id="@+id/divider"
@@ -553,7 +552,7 @@
         app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2"
-        app:layout_constraintVertical_bias="0.203" />
+        app:layout_constraintVertical_bias="0.291" />
 
     <Button
         android:id="@+id/btnAbout2"
@@ -568,6 +567,6 @@
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toEndOf="@+id/btnAbout"
         app:layout_constraintTop_toBottomOf="@+id/divider2"
-        app:layout_constraintVertical_bias="0.201" />
+        app:layout_constraintVertical_bias="0.289" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
