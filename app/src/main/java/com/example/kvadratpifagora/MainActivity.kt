@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlin.system.exitProcess
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Подбор текста в зависимости от нажатой цифровой кнопки, подробное описание
-        if (isDate == true) {
+        if (isDate) {
             when (b.id) {
                 R.id.btn1 -> {
                     dataStr = getText(R.string.long1) as String
@@ -156,7 +157,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Подбор текста в зависимости от нажатой цифровой кнопкиб КРАТКОЕ описание
-        if (isDate == false) {
+        if (!isDate) {
             when (b.id) {
                 R.id.btn1 -> txtText.text = getText(R.string.short1)
                 R.id.btn2 -> txtText.text = getText(R.string.short2)
@@ -175,6 +176,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        window.decorView.setBackgroundColor(ContextCompat.getColor(this, R.color.main_activity_background_color))
 
 
         //Добавляем возможность прокрутки в TextView

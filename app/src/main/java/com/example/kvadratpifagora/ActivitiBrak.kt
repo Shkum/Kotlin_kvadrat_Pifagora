@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activiti_brak.*
 import kotlin.math.round
 
@@ -25,6 +26,7 @@ class ActivitiBrak : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activiti_brak)
 
+        window.decorView.setBackgroundColor(ContextCompat.getColor(this, R.color.main_activity_background_color))
 
         //Отлеживаем введенный тект для мужа (Дату рождения)
         txtMuz.addTextChangedListener(object : TextWatcher {
@@ -64,7 +66,7 @@ class ActivitiBrak : AppCompatActivity() {
                         stabilnostMuza()
 
                         if (txtZenaDuh.text != "-") {
-                            Stabilnost()
+                            stabilnost()
                             //убираем клавиатуру
                             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                             imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
@@ -136,7 +138,7 @@ class ActivitiBrak : AppCompatActivity() {
 
                         stabilnostZeny()
                         if (txtMuzDuh.text != "-") {
-                            Stabilnost()
+                            stabilnost()
                             //убираем клавиатуру
                             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                             imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
@@ -233,16 +235,15 @@ class ActivitiBrak : AppCompatActivity() {
         val crm: Int = txt21.length() + txt24.length() + txt27.length()
         val DSM: Int = ddm * sm * crm
 
-        txtZenaDuh.text = "$DSM"
+        txtZenaDuh.text = DSM.toString()
 
-        txtZenaBit.text = "$BSM"
+        txtZenaBit.text = BSM.toString()
 
     }
 
 
-    fun Stabilnost() {
-        var s: Double
-        s = (Integer.parseInt(txtMuzDuh.text.toString()) * Integer.parseInt(txtZenaDuh.text.toString())).toDouble() / 365
+    fun stabilnost() {
+        var s: Double = (Integer.parseInt(txtMuzDuh.text.toString()) * Integer.parseInt(txtZenaDuh.text.toString())).toDouble() / 365
         s = round(s * 10.0) / 10.0
         txtDuh.text = "$s"
         s = (Integer.parseInt(txtMuzBit.text.toString()) * Integer.parseInt(txtZenaBit.text.toString())).toDouble() / 365

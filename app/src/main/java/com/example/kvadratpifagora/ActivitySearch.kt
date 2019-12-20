@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_search.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,13 +19,15 @@ import kotlin.math.round
 
 
 class ActivitySearch : AppCompatActivity() {
-    var searchFlag: Boolean = false
+    private var searchFlag: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        lstDate.onItemClickListener = OnItemClickListener { parent, itemClicked, position, id ->
+        window.decorView.setBackgroundColor(ContextCompat.getColor(this, R.color.main_activity_background_color))
+
+        lstDate.onItemClickListener = OnItemClickListener { _, itemClicked, _, _ ->
             var getDte: String = (itemClicked as TextView).text.toString()
             textView8.text=getDte
             getDte = getDte.replace(".", "")
@@ -48,7 +51,7 @@ class ActivitySearch : AppCompatActivity() {
     }
 
 
-    private fun ProverkaSovpadeniy(string: String): Boolean {
+    private fun proverkaSovpadeniy(string: String): Boolean {
 
         var c1 = false
         var c2 = false
@@ -92,20 +95,10 @@ class ActivitySearch : AppCompatActivity() {
         return str.length == 8
     }
 
-    fun txtClear() {
-        editTxt1.setText("")
-        editTxt2.setText("")
-        editTxt3.setText("")
-        editTxt4.setText("")
-        editTxt5.setText("")
-        editTxt6.setText("")
-        editTxt7.setText("")
-        editTxt8.setText("")
-        editTxt9.setText("")
-    }
 
     fun onClick(view: View) {
         val b = view as Button
+        textView8.text=""
         when (b.id) {
             R.id.btnSearchBack -> {
                 searchFlag = false
@@ -135,7 +128,7 @@ class ActivitySearch : AppCompatActivity() {
                     val valDte2 = valDate.isValidDate(dte2)
                     if (valDte1 && valDte2) {
 
-                        StartSearch()
+                        startSearch()
 
                     } else wrongDate()
                 } else wrongDate()
@@ -152,7 +145,7 @@ class ActivitySearch : AppCompatActivity() {
         }
     }
 
-    private fun StartSearch() {
+    private fun startSearch() {
 
         val validDate1 = isDateExist()
         val validDate2 = isDateExist()
@@ -190,7 +183,7 @@ class ActivitySearch : AppCompatActivity() {
 
             while (dteCompare(dDate, dDate2) && searchFlag) {
 
-                if (ProverkaSovpadeniy(dDate)) {
+                if (proverkaSovpadeniy(dDate)) {
                     strDates.add(0, dDate)
                     adapter.notifyDataSetChanged()
                 }

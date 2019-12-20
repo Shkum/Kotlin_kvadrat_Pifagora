@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_full_descr.*
 
 
@@ -15,6 +16,8 @@ class ActivityFullDescr : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_descr)
+
+        window.decorView.setBackgroundColor(ContextCompat.getColor(this, R.color.main_activity_background_color))
 
         //Добавляем скрол для textView
         textFullText.movementMethod = ScrollingMovementMethod()
