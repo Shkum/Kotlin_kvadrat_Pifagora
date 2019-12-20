@@ -12,10 +12,10 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activiti_brak.*
+import kotlinx.android.synthetic.main.activity_brak.*
 import kotlin.math.round
 
-class ActivitiBrak : AppCompatActivity() {
+class ActivityBrak : AppCompatActivity() {
 
 
     internal var isDate: Boolean = false
@@ -24,7 +24,7 @@ class ActivitiBrak : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activiti_brak)
+        setContentView(R.layout.activity_brak)
 
         window.decorView.setBackgroundColor(ContextCompat.getColor(this, R.color.main_activity_background_color))
 

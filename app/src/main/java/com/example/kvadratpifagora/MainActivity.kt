@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlin.system.exitProcess
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,21 +35,21 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.mnu_Exit -> {
-                finish()
-                exitProcess(0)
+                finishAffinity()
+                true
             }
             R.id.mnu_Brak -> {
-                val intent = Intent(this, ActivitiBrak::class.java)
+                val intent = Intent(this, ActivityBrak::class.java)
                 startActivity(intent)
                 true
             }
-            R.id.mnu_PolnOpis  -> {
+            R.id.mnu_PolnOpis -> {
                 val intent = Intent(this, ActivityFullDescr::class.java)
                 startActivity(intent)
                 true
             }
 
-            R.id.mnu_Search  -> {
+            R.id.mnu_Search -> {
                 val intent = Intent(this, ActivitySearch::class.java)
                 startActivity(intent)
                 true
