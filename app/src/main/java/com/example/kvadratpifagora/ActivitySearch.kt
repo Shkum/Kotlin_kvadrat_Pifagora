@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_search.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.round
-import kotlinx.coroutines.*
 
 
 class ActivitySearch : AppCompatActivity() {
