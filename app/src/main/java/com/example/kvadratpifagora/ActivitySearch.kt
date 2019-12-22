@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.round
 
-
 class ActivitySearch : AppCompatActivity() {
     private var searchFlag: Boolean = false
 
@@ -144,6 +143,7 @@ class ActivitySearch : AppCompatActivity() {
 
         }
     }
+
 
     private fun startSearch() {
 
