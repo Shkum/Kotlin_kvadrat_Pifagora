@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_search.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.round
+import kotlinx.coroutines.*
 
 
 class ActivitySearch : AppCompatActivity() {
@@ -29,7 +30,7 @@ class ActivitySearch : AppCompatActivity() {
 
         lstDate.onItemClickListener = OnItemClickListener { _, itemClicked, _, _ ->
             var getDte: String = (itemClicked as TextView).text.toString()
-            textView8.text=getDte
+            textView8.text = getDte
             getDte = getDte.replace(".", "")
             val pifagor = Pifagor()
             pifagor.pifCalc(getDte)
@@ -98,7 +99,7 @@ class ActivitySearch : AppCompatActivity() {
 
     fun onClick(view: View) {
         val b = view as Button
-        textView8.text=""
+        textView8.text = ""
         when (b.id) {
             R.id.btnSearchBack -> {
                 searchFlag = false
@@ -192,10 +193,10 @@ class ActivitySearch : AppCompatActivity() {
             }
 
             btnSearchStart.isEnabled = true
+            searchFlag = false
 
         }
 
-        searchFlag = false
     }
 
     private fun dteIncrement(str: String): String {
