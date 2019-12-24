@@ -90,8 +90,40 @@ class ActivitySearch : AppCompatActivity() {
 
     }
 
-    private fun checkLenght(str: String): Boolean {
+    private fun checkLength(str: String): Boolean {
         return str.length == 8
+    }
+
+    private fun checkTotalLength(): Boolean {
+        var c1 = 0
+        var c2 = 0
+        var c3 = 0
+        var c4 = 0
+        var c5 = 0
+        var c6 = 0
+        var c7 = 0
+        var c8 = 0
+        var c9 = 0
+
+        if (check1.isChecked) c1 = editTxt1.text.length
+        if (check2.isChecked) c2 = editTxt2.text.length
+        if (check3.isChecked) c3 = editTxt3.text.length
+        if (check4.isChecked) c4 = editTxt4.text.length
+        if (check5.isChecked) c5 = editTxt5.text.length
+        if (check6.isChecked) c6 = editTxt6.text.length
+        if (check7.isChecked) c7 = editTxt7.text.length
+        if (check8.isChecked) c8 = editTxt8.text.length
+        if (check9.isChecked) c9 = editTxt9.text.length
+
+        val cTot: Int = c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9
+
+        if (cTot <= 15) return true
+        else {
+            val msg: Toast = Toast.makeText(applicationContext, "Общая длина выбраных характеристик не может быть больше 15", Toast.LENGTH_LONG)
+            msg.show()
+            return false
+        }
+
     }
 
 
@@ -106,15 +138,15 @@ class ActivitySearch : AppCompatActivity() {
             }
 
             R.id.btnSearchStart -> {
-                btnSearchStart.isEnabled = false
+
 
                 val valDate = isDateExist()
-                val lenght1 = checkLenght(editDateStart.text.toString())
-                val lenght2 = checkLenght(editDateEnd.text.toString())
+                val length1 = checkLength(editDateStart.text.toString())
+                val length2 = checkLength(editDateEnd.text.toString())
                 val dte1: String
                 val dte2: String
-                if (lenght1 && lenght2) {
-
+                if (length1 && length2 && checkTotalLength()) {
+                    btnSearchStart.isEnabled = false
                     var dd: String = editDateStart.text.substring(0, 2)
                     var mm: String = editDateStart.text.substring(2, 4)
                     var yy: String = editDateStart.text.substring(4, 8)
@@ -127,7 +159,23 @@ class ActivitySearch : AppCompatActivity() {
                     val valDte2 = valDate.isValidDate(dte2)
                     if (valDte1 && valDte2) {
 
-                        startSearch()
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                       // GlobalScope.launch {
+                           // val value: String = withContext(Dispatchers.Default) {
+                                val value: String = startSearch()
+                           // }
+
+
+
+                       // }
+
+
+
+                        val strArr = value.split(";")
+                        val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, strArr)
+                        lstDate.adapter = adapter
+
+                        btnSearchStart.isEnabled = true
 
                     } else wrongDate()
                 } else wrongDate()
@@ -145,7 +193,7 @@ class ActivitySearch : AppCompatActivity() {
     }
 
 
-    private fun startSearch() {
+    private  fun startSearch(): String {
 
         val validDate1 = isDateExist()
         val validDate2 = isDateExist()
@@ -167,35 +215,32 @@ class ActivitySearch : AppCompatActivity() {
 
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         if (imm.isActive) imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
+        var strDates: String = ""
 
         if (editDateStart.length() == 8 && editDateEnd.length() == 8 && validDate1.isValidDate(dDate1) && validDate2.isValidDate(dDate2)) {
-
-            val strDates: ArrayList<String> = ArrayList()
-            val adapter: ArrayAdapter<String>
-            adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, strDates)
-            lstDate.adapter = adapter
 
 
             dDate = dDate1
             searchFlag = true
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////
-
+            var s: String
             while (dteCompare(dDate, dDate2) && searchFlag) {
 
                 if (proverkaSovpadeniy(dDate)) {
-                    strDates.add(0, dDate)
-                    adapter.notifyDataSetChanged()
+                    s = if (strDates.isNotEmpty()) ";" else ""
+                    strDates = "$strDates$s$dDate"
                 }
                 dDate = dteIncrement(dDate)
                 textView7.text = calcStatus(dDate1, dDate2, dDate)
             }
 
-            btnSearchStart.isEnabled = true
             searchFlag = false
 
         }
 
+
+        return strDates
     }
 
     private fun dteIncrement(str: String): String {
@@ -227,9 +272,9 @@ class ActivitySearch : AppCompatActivity() {
         val dateDiffCurrent: Long = ((dte2.time - dte3.time) / 60 / 60 / 24 / 1000)
         var result: Double = (dateDiff.toDouble() - dateDiffCurrent.toDouble()) / dateDiff.toDouble()
 
-        result = round(result * 10.0) / 10.0
+        result = round(result * 100)
 
-        return (result * 100).toString() + " %"
+        return (result).toString() + " %"
     }
 
 
