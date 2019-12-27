@@ -1,10 +1,8 @@
 package com.example.kvadratpifagora
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -13,12 +11,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.round
 
+
 class ActivitySearch : AppCompatActivity() {
+
+
+    var strArr: List<String> = ArrayList()
+
     private var searchFlag: Boolean = false
+    private var value: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +46,6 @@ class ActivitySearch : AppCompatActivity() {
             editTxt7.setText(pifagor.semerki)
             editTxt8.setText(pifagor.vosmerki)
             editTxt9.setText(pifagor.devyatki)
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            if (imm.isActive) imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
 
         }
 
@@ -117,15 +120,9 @@ class ActivitySearch : AppCompatActivity() {
 
         val cTot: Int = c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9
 
-        if (cTot <= 15) return true
-        else {
-            val msg: Toast = Toast.makeText(applicationContext, "Общая длина выбраных характеристик не может быть больше 15", Toast.LENGTH_LONG)
-            msg.show()
-            return false
-        }
+        return (cTot <= 15)
 
     }
-
 
     fun onClick(view: View) {
         val b = view as Button
@@ -136,64 +133,69 @@ class ActivitySearch : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
-
             R.id.btnSearchStart -> {
-
 
                 val valDate = isDateExist()
                 val length1 = checkLength(editDateStart.text.toString())
                 val length2 = checkLength(editDateEnd.text.toString())
                 val dte1: String
                 val dte2: String
-                if (length1 && length2 && checkTotalLength()) {
-                    btnSearchStart.isEnabled = false
-                    var dd: String = editDateStart.text.substring(0, 2)
-                    var mm: String = editDateStart.text.substring(2, 4)
-                    var yy: String = editDateStart.text.substring(4, 8)
-                    dte1 = "$dd.$mm.$yy"
-                    val valDte1 = valDate.isValidDate(dte1)
-                    dd = editDateEnd.text.substring(0, 2)
-                    mm = editDateEnd.text.substring(2, 4)
-                    yy = editDateEnd.text.substring(4, 8)
-                    dte2 = "$dd.$mm.$yy"
-                    val valDte2 = valDate.isValidDate(dte2)
-                    if (valDte1 && valDte2) {
+                if (checkTotalLength()) {
+                    if (length1 && length2) {
+                        enableAll(false)
+                        var dd: String = editDateStart.text.substring(0, 2)
+                        var mm: String = editDateStart.text.substring(2, 4)
+                        var yy: String = editDateStart.text.substring(4, 8)
+                        dte1 = "$dd.$mm.$yy"
+                        val valDte1 = valDate.isValidDate(dte1)
+                        dd = editDateEnd.text.substring(0, 2)
+                        mm = editDateEnd.text.substring(2, 4)
+                        yy = editDateEnd.text.substring(4, 8)
+                        dte2 = "$dd.$mm.$yy"
+                        val valDte2 = valDate.isValidDate(dte2)
+                        if (valDte1 && valDte2) {
 
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                       // GlobalScope.launch {
-                           // val value: String = withContext(Dispatchers.Default) {
-                                val value: String = startSearch()
-                           // }
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-                       // }
-
-
-
-                        val strArr = value.split(";")
-                        val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, strArr)
-                        lstDate.adapter = adapter
-
-                        btnSearchStart.isEnabled = true
-
+                            GlobalScope.launch(Dispatchers.Main) {
+                                updateUi()
+                            }
+                        } else wrongDate()
                     } else wrongDate()
-                } else wrongDate()
-
-
+                } else wrongLength()
             }
 
             R.id.btnSearchEnd -> {
-
                 searchFlag = false
-                btnSearchStart.isEnabled = true
+                enableAll(true)
             }
 
         }
     }
 
 
-    private  fun startSearch(): String {
+    private suspend fun updateUi() {
+        strArr = emptyList()
+        var adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, strArr)
+        lstDate.adapter = adapter
+
+        withContext(Dispatchers.Default) {
+            value = withContext(Dispatchers.Default) {
+                startSearch()
+            }
+        }
+        strArr = value.split(";")
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, strArr)
+        lstDate.adapter = adapter
+        enableAll(true)
+    }
+
+
+    private suspend fun startSearch(): String {
+        val dateStrings: ArrayList<String> = ArrayList()
+        val adapter: ArrayAdapter<String>
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, dateStrings)
+        lstDate.adapter = adapter
 
         val validDate1 = isDateExist()
         val validDate2 = isDateExist()
@@ -213,12 +215,9 @@ class ActivitySearch : AppCompatActivity() {
         yy = cValue.substring(4, 8)
         dDate2 = "$dd.$mm.$yy"
 
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (imm.isActive) imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
-        var strDates: String = ""
+        var strDates = ""
 
         if (editDateStart.length() == 8 && editDateEnd.length() == 8 && validDate1.isValidDate(dDate1) && validDate2.isValidDate(dDate2)) {
-
 
             dDate = dDate1
             searchFlag = true
@@ -230,16 +229,21 @@ class ActivitySearch : AppCompatActivity() {
                 if (proverkaSovpadeniy(dDate)) {
                     s = if (strDates.isNotEmpty()) ";" else ""
                     strDates = "$strDates$s$dDate"
+                    dateStrings.add(dateStrings.lastIndex + 1, dDate)
+                    delay(200)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        adapter.notifyDataSetChanged()
+                    }
                 }
                 dDate = dteIncrement(dDate)
-                textView7.text = calcStatus(dDate1, dDate2, dDate)
+                GlobalScope.launch(Dispatchers.Main) {
+                    textView7.text = calcStatus(dDate1, dDate2, dDate)
+                }
             }
 
             searchFlag = false
 
         }
-
-
         return strDates
     }
 
@@ -263,6 +267,11 @@ class ActivitySearch : AppCompatActivity() {
         msg.show()
     }
 
+    private fun wrongLength() {
+        val msg: Toast = Toast.makeText(applicationContext, "Общее колличество цифр в выбранных характеристиках не может быть больше 15", Toast.LENGTH_LONG)
+        msg.show()
+    }
+
     private fun calcStatus(startdate: String, enddate: String, currentdate: String): String {
         val sdf = SimpleDateFormat("dd.MM.yyyy")
         val dte1: Date = sdf.parse(startdate)
@@ -275,6 +284,33 @@ class ActivitySearch : AppCompatActivity() {
         result = round(result * 100)
 
         return (result).toString() + " %"
+    }
+
+    private fun enableAll(flag: Boolean) {
+        check1.isEnabled = flag
+        check2.isEnabled = flag
+        check3.isEnabled = flag
+        check4.isEnabled = flag
+        check5.isEnabled = flag
+        check6.isEnabled = flag
+        check7.isEnabled = flag
+        check8.isEnabled = flag
+        check9.isEnabled = flag
+        editTxt1.isEnabled = flag
+        editTxt2.isEnabled = flag
+        editTxt3.isEnabled = flag
+        editTxt4.isEnabled = flag
+        editTxt5.isEnabled = flag
+        editTxt6.isEnabled = flag
+        editTxt7.isEnabled = flag
+        editTxt8.isEnabled = flag
+        editTxt9.isEnabled = flag
+        editDateStart.isEnabled = flag
+        editDateEnd.isEnabled = flag
+        btnSearchStart.isEnabled = flag
+        btnSearchEnd.isEnabled = !flag
+        lstDate.isEnabled = flag
+
     }
 
 
