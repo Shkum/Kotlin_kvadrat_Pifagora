@@ -263,13 +263,11 @@ class ActivitySearch : AppCompatActivity() {
     }
 
     private fun wrongDate() {
-        val msg: Toast = Toast.makeText(applicationContext, "НЕПРАВИЛЬНАЯ ДАТА", Toast.LENGTH_LONG)
-        msg.show()
+        Toast.makeText(applicationContext, "НЕПРАВИЛЬНАЯ ДАТА", Toast.LENGTH_LONG).show()
     }
 
     private fun wrongLength() {
-        val msg: Toast = Toast.makeText(applicationContext, "Общее колличество цифр в выбранных характеристиках не может быть больше 15", Toast.LENGTH_LONG)
-        msg.show()
+        Toast.makeText(applicationContext, "Общее колличество цифр в выбранных характеристиках не может быть больше 15", Toast.LENGTH_LONG).show()
     }
 
     private fun calcStatus(startdate: String, enddate: String, currentdate: String): String {
@@ -283,7 +281,7 @@ class ActivitySearch : AppCompatActivity() {
 
         result = round(result * 100)
 
-        return (result).toString() + " %"
+        return "$result %"
     }
 
     private fun enableAll(flag: Boolean) {

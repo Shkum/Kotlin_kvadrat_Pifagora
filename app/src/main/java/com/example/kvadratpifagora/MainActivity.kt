@@ -2,9 +2,11 @@ package com.example.kvadratpifagora
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.text.method.ScrollingMovementMethod
 import android.view.Menu
@@ -12,12 +14,11 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import kotlin.system.exitProcess
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     internal var isDate: Boolean = false
     internal var cValue: String = ""
-
+private var mText: String = ""
 
     //Обработка меню под тремя точками
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         val strArr: Array<String>
         var dataStr: String
 
-        if (b.id == R.id.button10) {
+        if (b.id == R.id.btnSave) {
             val msgAbout: Toast = Toast.makeText(applicationContext, getText(R.string.About), Toast.LENGTH_LONG)
             msgAbout.show()
         }
@@ -234,7 +235,7 @@ class MainActivity : AppCompatActivity() {
                         txtChislo4.text = pifagor.chislo4.toString()
 
 
-                        button10.isEnabled = true
+                        btnSave.isEnabled = true
                         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         if (txtBirthDay.hasFocus()) imm.hideSoftInputFromWindow(window.currentFocus!!.windowToken, 0)
 
@@ -250,7 +251,7 @@ class MainActivity : AppCompatActivity() {
                     btn7.text = "7"
                     btn8.text = "8"
                     btn9.text = "9"
-                    button10.isEnabled = false
+                    btnSave.isEnabled = false
                     txtText.text = ""
                     txtStolb1.text = "-"
                     txtStolb2.text = "-"
@@ -319,20 +320,56 @@ class MainActivity : AppCompatActivity() {
 
 
     //Обрабатываем сохранение имени и даты рождения
-    fun btnSafeClick(view: View) {
+    fun btnSaveClick(view: View) {
 
-        // msgEnterText("Сохранить", "Введите имя:")
+        msgEnterText("Сохранить", "Введите имя для: " + txtBirthDay.text.toString())
         Toast.makeText(this, "Дата сохранена", Toast.LENGTH_SHORT).show()
     }
 
+    fun btnLoadClick(view: View) {
+
+        msgLoadList(arrayOf("Red", "Orange", "Yellow", "Blue", "Green"))
+    }
 
     // показать сообщение о программе
     private fun msgAbout() {
         val msg = AlertDialog.Builder(this)
-        msg.setTitle("О программе").setMessage(R.string.About).setCancelable(false)
-            .setNegativeButton("ОК") { dialog, _ -> dialog.cancel() }
-        val alert = msg.create()
-        alert.show()
+        msg.setTitle("О программе").setMessage(R.string.About).setCancelable(false).setNegativeButton("ОК") { dialog, _ -> dialog.cancel() }
+        msg.create().show()
     }
+
+
+    private fun msgLoadList(list: Array<String>) {
+        val positiveButtonClick = { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("List of Items").setItems(list) { _, which ->
+            Toast.makeText(applicationContext, list[which] + " is clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        builder.setPositiveButton("OK", positiveButtonClick)
+        builder.show()
+    }
+
+
+    private fun msgEnterText(txtTitle: String, txtHint: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(txtTitle)
+        // Поле ввода в сообщении
+        val input = EditText(this)
+        // Параметры сообщения
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        input.hint = txtHint
+        builder.setView(input)
+        // Дейсвия в зависимости от нажатой кнопки в сообщении
+        builder.setPositiveButton("Сохранить") { _, _ ->
+            mText = input.text.toString().replace(" -> ","")
+            Toast.makeText(applicationContext, mText + " -> " + txtBirthDay.text.toString(), Toast.LENGTH_SHORT).show()
+         }
+        builder.setNegativeButton("Отмена") { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
+        builder.show()
+    }
+
+
 
 }
