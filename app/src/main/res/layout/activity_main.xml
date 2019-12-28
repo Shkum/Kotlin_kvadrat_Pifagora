@@ -8,10 +8,10 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btnDates2"
+        android:id="@+id/btnEditDates"
         android:layout_width="75dp"
         android:layout_height="29dp"
-        android:onClick="btnInterestingDates"
+        android:onClick="editSavedDates"
         android:text="изменить"
         android:textSize="8sp"
         android:visibility="visible"
