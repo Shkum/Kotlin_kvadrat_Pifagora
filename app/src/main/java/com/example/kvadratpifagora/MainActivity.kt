@@ -329,6 +329,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun btnInterestingDates(view: View) {
+        msgLoadList(arrayOf("a -> 26061979", "b -> 26121982", "c -> 20091984", "d -> 25092013", "e -> 05021957"))
+    }
+
     fun btnLoadClick(view: View) {
         var strArr: List<String> = ArrayList()
         listOfDates = openFile()
@@ -408,6 +412,7 @@ class MainActivity : AppCompatActivity() {
         builder.setNegativeButton("Отмена") { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
         builder.show()
     }
+
 
 
 }
