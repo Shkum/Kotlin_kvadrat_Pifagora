@@ -20,13 +20,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
 
+
+    private val fileName = "list.txt"
+    var listOfDates: String = ""
     internal var isDate: Boolean = false
     internal var cValue: String = ""
-private var mText: String = ""
+    private var msgText: String = ""
 
     //Обработка меню под тремя точками
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -318,18 +322,47 @@ private var mText: String = ""
         }
     }
 
-
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Обрабатываем сохранение имени и даты рождения
     fun btnSaveClick(view: View) {
-
         msgEnterText("Сохранить", "Введите имя для: " + txtBirthDay.text.toString())
-        Toast.makeText(this, "Дата сохранена", Toast.LENGTH_SHORT).show()
+
     }
 
     fun btnLoadClick(view: View) {
+        var strArr: List<String> = ArrayList()
+        listOfDates = openFile()
+        strArr = listOfDates.split("\n")
+        msgLoadList(strArr.toTypedArray())
 
-        msgLoadList(arrayOf("Red", "Orange", "Yellow", "Blue", "Green"))
     }
+
+
+    // Метод для открытия файла
+    private fun openFile(): String {
+        try {
+            val file = File(this.filesDir, fileName)
+            return (file.readText()) // Read file
+
+        } catch (t: Throwable) {
+            Toast.makeText(applicationContext, "Exception: $t", Toast.LENGTH_LONG).show()
+        }
+        return ""
+    }
+
+
+    // Метод для сохранения файла
+    private fun saveFile(string: String) {
+
+        try {
+            this.openFileOutput(fileName, Context.MODE_PRIVATE).use {
+                it.write(string.toByteArray())
+            }
+        } catch (t: Throwable) {
+            Toast.makeText(applicationContext, "Exception: $t", Toast.LENGTH_LONG).show()
+        }
+    }
+
 
     // показать сообщение о программе
     private fun msgAbout() {
@@ -343,11 +376,13 @@ private var mText: String = ""
         val positiveButtonClick = { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
         val builder = AlertDialog.Builder(this)
 
-        builder.setTitle("List of Items").setItems(list) { _, which ->
-            Toast.makeText(applicationContext, list[which] + " is clicked", Toast.LENGTH_SHORT).show()
+        builder.setTitle("Выбирите имя").setItems(list) { _, which ->
+            val lstItem = list[which].split(" -> ")
+            txtBirthDay.setText(lstItem[1])
+            //   Toast.makeText(applicationContext, lstItem[1], Toast.LENGTH_SHORT).show()
         }
 
-        builder.setPositiveButton("OK", positiveButtonClick)
+        builder.setPositiveButton("Отмена", positiveButtonClick)
         builder.show()
     }
 
@@ -363,13 +398,16 @@ private var mText: String = ""
         builder.setView(input)
         // Дейсвия в зависимости от нажатой кнопки в сообщении
         builder.setPositiveButton("Сохранить") { _, _ ->
-            mText = input.text.toString().replace(" -> ","")
-            Toast.makeText(applicationContext, mText + " -> " + txtBirthDay.text.toString(), Toast.LENGTH_SHORT).show()
-         }
+            msgText = input.text.toString().replace(" -> ", "")
+
+            saveFile(openFile() + "\n" + msgText + " -> " + txtBirthDay.text.toString())
+            Toast.makeText(this, "Дата сохранена", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(applicationContext, msgText + " -> " + txtBirthDay.text.toString(), Toast.LENGTH_SHORT).show()
+        }
         builder.setNegativeButton("Отмена") { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
         builder.show()
     }
-
 
 
 }
