@@ -330,15 +330,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun btnInterestingDates(view: View) {
-        msgLoadList(arrayOf("a -> 26061979", "b -> 26121982", "c -> 20091984", "d -> 25092013", "e -> 05021957"))
+        // txtBirthDay.setText("")
+        msgLoadList(
+            arrayOf(
+                "Эйнште́йн -> 14031879", "Наполеон -> 15081769", "Ленин -> 22041870", "Октябрьская революция -> 25101917", "ВОВ -> 22061945", "Вторая мировая в. -> 01091939", "Сталин -> 21121879",
+                "Путин -> 07101952", "Мао Дзедун -> 26121893", "Джордж Бущ -> 12061924", "Пиночет -> 25111915", "Че Гевара -> 14061928"
+            )
+        )
     }
 
     fun btnLoadClick(view: View) {
-        var strArr: List<String> = ArrayList()
+        // txtBirthDay.setText("")
         listOfDates = openFile()
-        strArr = listOfDates.split("\n")
-        msgLoadList(strArr.toTypedArray())
-
+        if (listOfDates.isNotEmpty()) {
+            val strArr: List<String> = listOfDates.split("\n")
+            msgLoadList(strArr.toTypedArray())
+        } else {
+            toast("Список пуст")
+        }
     }
 
 
@@ -349,7 +358,7 @@ class MainActivity : AppCompatActivity() {
             return (file.readText()) // Read file
 
         } catch (t: Throwable) {
-            Toast.makeText(applicationContext, "Exception: $t", Toast.LENGTH_LONG).show()
+            toast("Exception: $t")
         }
         return ""
     }
@@ -363,7 +372,7 @@ class MainActivity : AppCompatActivity() {
                 it.write(string.toByteArray())
             }
         } catch (t: Throwable) {
-            Toast.makeText(applicationContext, "Exception: $t", Toast.LENGTH_LONG).show()
+            toast("Exception: $t")
         }
     }
 
@@ -383,7 +392,7 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("Выбирите имя").setItems(list) { _, which ->
             val lstItem = list[which].split(" -> ")
             txtBirthDay.setText(lstItem[1])
-            //   Toast.makeText(applicationContext, lstItem[1], Toast.LENGTH_SHORT).show()
+            toast(lstItem[0] + " -> " + lstItem[1])
         }
 
         builder.setPositiveButton("Отмена", positiveButtonClick)
@@ -404,20 +413,66 @@ class MainActivity : AppCompatActivity() {
         builder.setPositiveButton("Сохранить") { _, _ ->
             msgText = input.text.toString().replace(" -> ", "")
 
-            saveFile(openFile() + "\n" + msgText + " -> " + txtBirthDay.text.toString())
-            Toast.makeText(this, "Дата сохранена", Toast.LENGTH_SHORT).show()
-
-            Toast.makeText(applicationContext, msgText + " -> " + txtBirthDay.text.toString(), Toast.LENGTH_SHORT).show()
+            saveFile(openFile() + (if (openFile().isNotEmpty()) "\n" else "") + msgText + " -> " + txtBirthDay.text.toString())
+            toast("Дата сохранена" + "\n" + msgText + " -> " + txtBirthDay.text.toString())
         }
-        builder.setNegativeButton("Отмена") { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
+        builder.setNegativeButton("Отмена") { _: DialogInterface, _: Int -> toast("Отмена") }
         builder.show()
     }
 
     fun editSavedDates(view: View) {
 
+        lateinit var dialog: AlertDialog
+        val txtFromFile = openFile()
+        if (txtFromFile.isNotEmpty()) {
+
+            val txtArrFromFile = txtFromFile.split("\n")
+            val txtArrFromFileNew: ArrayList<String> = ArrayList()
+            val arrayListFromFile: Array<String> = txtArrFromFile.toTypedArray()
+            val arrayChecked = Array(arrayListFromFile.size) { false }.toBooleanArray()
+
+            val builder = AlertDialog.Builder(this)
+
+            builder.setTitle("Удалить выбранное...")
 
 
+            builder.setMultiChoiceItems(arrayListFromFile, arrayChecked) { _, which, isChecked ->
+                arrayChecked[which] = isChecked
+                // val item = arrayListFromFile[which]
+                //  toast("$item clicked.")
+            }
+
+            builder.setPositiveButton("OK") { _, _ ->
+                for (i in arrayListFromFile.indices) {
+                    val checked = arrayChecked[i]
+                    if (checked) {
+                        println(" ${arrayListFromFile[i]}")
+
+                    } else {
+                        txtArrFromFileNew.add(arrayListFromFile[i])
+                    }
+
+                }
+                var strToSave = ""
+                for (i in txtArrFromFileNew.indices) {
+                    strToSave = strToSave + txtArrFromFileNew[i] + (if (i < txtArrFromFileNew.lastIndex) "\n" else "")
+
+                }
+
+                saveFile(strToSave)
+                toast("Выбранные даты удалены")
+            }
+            builder.setNegativeButton("Отмена") { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
+            dialog = builder.create()
+            dialog.show()
+        } else {
+            toast("Список пуст")
+        }
     }
 
+
+    private fun Context.toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 
 }

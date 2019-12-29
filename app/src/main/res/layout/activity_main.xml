@@ -12,11 +12,11 @@
         android:layout_width="75dp"
         android:layout_height="29dp"
         android:onClick="editSavedDates"
-        android:text="изменить"
+        android:text="Удалить"
         android:textSize="8sp"
         android:visibility="visible"
-        ads:layout_constraintEnd_toStartOf="@+id/btnDates"
-        ads:layout_constraintHorizontal_bias="0.492"
+        ads:layout_constraintEnd_toStartOf="@+id/btnSave"
+        ads:layout_constraintHorizontal_bias="0.177"
         ads:layout_constraintStart_toEndOf="@+id/btnLoad"
         ads:layout_constraintTop_toTopOf="parent" />
 
@@ -517,13 +517,12 @@
         android:id="@+id/btnDates"
         android:layout_width="75dp"
         android:layout_height="29dp"
-        android:layout_marginEnd="42dp"
         android:onClick="btnInterestingDates"
         android:text="Даты"
         android:textSize="8sp"
         android:visibility="visible"
         ads:layout_constraintEnd_toStartOf="@+id/btnSave"
-        ads:layout_constraintHorizontal_bias="1.0"
+        ads:layout_constraintHorizontal_bias="0.822"
         ads:layout_constraintStart_toEndOf="@+id/btnLoad"
         ads:layout_constraintTop_toTopOf="parent" />
 
