@@ -1,4 +1,4 @@
-package com.example.kvadratpifagora
+package com.SAMsoft.kvadratpifagora
 
 import android.app.AlertDialog
 import android.content.Context

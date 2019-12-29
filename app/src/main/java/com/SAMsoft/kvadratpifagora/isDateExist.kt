@@ -1,4 +1,4 @@
-package com.example.kvadratpifagora
+package com.SAMsoft.kvadratpifagora
 
 import java.text.ParseException
 import java.text.SimpleDateFormat

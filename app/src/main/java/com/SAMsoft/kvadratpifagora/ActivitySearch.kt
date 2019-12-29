@@ -1,4 +1,4 @@
-package com.example.kvadratpifagora
+package com.SAMsoft.kvadratpifagora
 
 import android.content.Intent
 import android.os.Bundle

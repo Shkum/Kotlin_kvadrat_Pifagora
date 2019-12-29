@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.kvadratpifagora">
+    package="com.SAMsoft.kvadratpifagora">
 
     <application
         android:allowBackup="true"
@@ -10,18 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ActivitySearch"
+            android:name="com.SAMsoft.kvadratpifagora.ActivitySearch"
             android:label="@string/Srch"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ActivityFullDescr"
+            android:name="com.SAMsoft.kvadratpifagora.ActivityFullDescr"
             android:label="@string/FullDescript"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActivityBrak"
+            android:name="com.SAMsoft.kvadratpifagora.ActivityBrak"
             android:label="@string/sovmBrak"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.SAMsoft.kvadratpifagora.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
