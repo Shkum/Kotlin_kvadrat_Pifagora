@@ -31,7 +31,7 @@ class ActivityBrak : AppCompatActivity() {
         //Отлеживаем введенный тект для мужа (Дату рождения)
         txtMuz.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val validDate = isDateExist()
+                val validDate = IsDateExist()
                 val pifagor = Pifagor()
                 cValue = txtMuz.text.toString()
                 isDate = false
@@ -104,7 +104,7 @@ class ActivityBrak : AppCompatActivity() {
         //Отлеживаем введенный тект для жены (Дату рождения)
         txtZena.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val validDate = isDateExist()
+                val validDate = IsDateExist()
                 val pifagor = Pifagor()
                 cValue = txtZena.text.toString()
                 isDate = false

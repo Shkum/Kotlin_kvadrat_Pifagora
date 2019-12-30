@@ -140,7 +140,7 @@ class ActivitySearch : AppCompatActivity() {
             }
             R.id.btnSearchStart -> {
 
-                val valDate = isDateExist()
+                val valDate = IsDateExist()
                 val length1 = checkLength(editDateStart.text.toString())
                 val length2 = checkLength(editDateEnd.text.toString())
                 val dte1: String
@@ -201,8 +201,8 @@ class ActivitySearch : AppCompatActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, dateStrings)
         lstDate.adapter = adapter
 
-        val validDate1 = isDateExist()
-        val validDate2 = isDateExist()
+        val validDate1 = IsDateExist()
+        val validDate2 = IsDateExist()
         val dDate1: String
         val dDate2: String
         var dDate: String

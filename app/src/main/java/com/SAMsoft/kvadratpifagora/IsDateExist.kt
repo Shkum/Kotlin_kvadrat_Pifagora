@@ -3,7 +3,7 @@ package com.SAMsoft.kvadratpifagora
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
-class isDateExist {
+class IsDateExist {
 
     //Проверка на правильность введенной даты (существует ли она в календаре)
     fun isValidDate(dateString: String): Boolean {

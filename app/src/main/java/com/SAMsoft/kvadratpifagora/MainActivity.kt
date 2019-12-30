@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity() {
         //Отлеживаем введенный тект (Дату рождения)
         txtBirthDay.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val validDate = isDateExist()
+                val validDate = IsDateExist()
                 val pifagor = Pifagor()
                 cValue = txtBirthDay.text.toString()
                 isDate = false
