@@ -88,10 +88,6 @@ class MainActivity : AppCompatActivity() {
         val strArr: Array<String>
         var dataStr: String
 
-        if (b.id == R.id.btnSave) {
-            val msgAbout: Toast = Toast.makeText(applicationContext, getText(R.string.About), Toast.LENGTH_LONG)
-            msgAbout.show()
-        }
 
         //Подбор текста в зависимости от нажатой цифровой кнопки, подробное описание
         if (isDate) {
@@ -384,9 +380,9 @@ class MainActivity : AppCompatActivity() {
         msg.create().show()
     }
 
-
+// Показать диалог со списком дат
     private fun msgLoadList(list: Array<String>) {
-        val positiveButtonClick = { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
+        val positiveButtonClick = { _: DialogInterface, _: Int -> toast("Отмена") }
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle("Выберите дату").setItems(list) { _, which ->
@@ -399,7 +395,7 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
-
+//показать диалог с editText для ввода имени для сохранения
     private fun msgEnterText(txtTitle: String, txtHint: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(txtTitle)
@@ -420,6 +416,8 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
+
+    //показать диалог с checkBox и удалить выбранное
     fun editSavedDates(view: View) {
 
         lateinit var dialog: AlertDialog
@@ -462,7 +460,7 @@ class MainActivity : AppCompatActivity() {
                 saveFile(strToSave)
                 toast("Выбранные даты удалены")
             }
-            builder.setNegativeButton("Отмена") { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
+            builder.setNegativeButton("Отмена") { _: DialogInterface, _: Int -> toast(("Отмена")) }
             dialog = builder.create()
             dialog.show()
         } else {
