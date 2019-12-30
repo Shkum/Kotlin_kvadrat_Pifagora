@@ -19,10 +19,12 @@ import kotlin.math.round
 
 class ActivitySearch : AppCompatActivity() {
 
-
+//переменная для добавления дат в корутине
     var strArr: List<String> = ArrayList()
 
+    // флаг для цикла
     private var searchFlag: Boolean = false
+
     private var value: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +33,7 @@ class ActivitySearch : AppCompatActivity() {
 
         window.decorView.setBackgroundColor(ContextCompat.getColor(this, R.color.main_activity_background_color))
 
+            //Клик листнер для listView
         lstDate.onItemClickListener = OnItemClickListener { _, itemClicked, _, _ ->
             var getDte: String = (itemClicked as TextView).text.toString()
             textView8.text = getDte
@@ -52,7 +55,7 @@ class ActivitySearch : AppCompatActivity() {
         editDateStart.requestFocus()
     }
 
-
+// поиск дат по заданным характеристикам
     private fun proverkaSovpadeniy(string: String): Boolean {
 
         var c1 = false
@@ -97,6 +100,8 @@ class ActivitySearch : AppCompatActivity() {
         return str.length == 8
     }
 
+
+    //проверка общей длина выбранных рактеристик (не больше 15)
     private fun checkTotalLength(): Boolean {
         var c1 = 0
         var c2 = 0
@@ -173,24 +178,23 @@ class ActivitySearch : AppCompatActivity() {
         }
     }
 
-
+// фкнкуия корутина, из которой вызывается дркгая корктина
     private suspend fun updateUi() {
         strArr = emptyList()
         var adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, strArr)
         lstDate.adapter = adapter
-
-        withContext(Dispatchers.Default) {
+            //поиск дат в корутине (отдельном потоке)
             value = withContext(Dispatchers.Default) {
                 startSearch()
             }
-        }
+
         strArr = value.split(";")
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, strArr)
         lstDate.adapter = adapter
         enableAll(true)
     }
 
-
+// поиск и сравнение дат
     private suspend fun startSearch(): String {
         val dateStrings: ArrayList<String> = ArrayList()
         val adapter: ArrayAdapter<String>
@@ -231,22 +235,26 @@ class ActivitySearch : AppCompatActivity() {
                     strDates = "$strDates$s$dDate"
                     dateStrings.add(dateStrings.lastIndex + 1, dDate)
                     delay(200)
+
+                    //обновление адаптера из основного потока, так как в дополнительном потоке вызовет ошибку
                     GlobalScope.launch(Dispatchers.Main) {
                         adapter.notifyDataSetChanged()
                     }
                 }
+                    //увеличиваем дату на один день
                 dDate = dteIncrement(dDate)
+                //изменяем % поска textView из основного потока, так как в дополнительном вызывает ошибку
                 GlobalScope.launch(Dispatchers.Main) {
                     textView7.text = calcStatus(dDate1, dDate2, dDate)
                 }
             }
-
             searchFlag = false
-
         }
         return strDates
     }
 
+
+    //увеличение даты на один день
     private fun dteIncrement(str: String): String {
         val dte: Calendar = Calendar.getInstance()
         val sdf = SimpleDateFormat("dd.MM.yyyy")
@@ -255,6 +263,7 @@ class ActivitySearch : AppCompatActivity() {
         return sdf.format(dte.time).toString()
     }
 
+    //Сравнение двух дат
     private fun dteCompare(date1: String, date2: String): Boolean {
         val sdf = SimpleDateFormat("dd.MM.yyyy")
         val dte1: Date = sdf.parse(date1)
@@ -270,6 +279,7 @@ class ActivitySearch : AppCompatActivity() {
         Toast.makeText(applicationContext, "Общее колличество цифр в выбранных характеристиках не может быть больше 15", Toast.LENGTH_LONG).show()
     }
 
+    //Прогресс поиска в %
     private fun calcStatus(startdate: String, enddate: String, currentdate: String): String {
         val sdf = SimpleDateFormat("dd.MM.yyyy")
         val dte1: Date = sdf.parse(startdate)
