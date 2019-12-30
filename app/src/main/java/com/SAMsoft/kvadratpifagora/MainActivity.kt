@@ -389,7 +389,7 @@ class MainActivity : AppCompatActivity() {
         val positiveButtonClick = { _: DialogInterface, _: Int -> Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show() }
         val builder = AlertDialog.Builder(this)
 
-        builder.setTitle("Выбирите имя").setItems(list) { _, which ->
+        builder.setTitle("Выберите дату").setItems(list) { _, which ->
             val lstItem = list[which].split(" -> ")
             txtBirthDay.setText(lstItem[1])
             toast(lstItem[0] + " -> " + lstItem[1])
