@@ -234,12 +234,13 @@ class ActivitySearch : AppCompatActivity() {
                     s = if (strDates.isNotEmpty()) ";" else ""
                     strDates = "$strDates$s$dDate"
                     dateStrings.add(dateStrings.lastIndex + 1, dDate)
-                    delay(200)
 
                     //обновление адаптера из основного потока, так как в дополнительном потоке вызовет ошибку
                     GlobalScope.launch(Dispatchers.Main) {
                         adapter.notifyDataSetChanged()
                     }
+                    // пауза для ожидания обновления адаптера, иначе дополнительный поток может не успевать за основным и добавится не та дата
+                    delay(200)
                 }
                     //увеличиваем дату на один день
                 dDate = dteIncrement(dDate)
