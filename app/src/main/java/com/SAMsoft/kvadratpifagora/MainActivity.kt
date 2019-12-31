@@ -330,7 +330,8 @@ class MainActivity : AppCompatActivity() {
         msgLoadList(
             arrayOf(
                 "Эйнште́йн -> 14031879", "Наполеон -> 15081769", "Ленин -> 22041870", "Октябрьская революция -> 25101917", "ВОВ -> 22061945", "Вторая мировая в. -> 01091939", "Сталин -> 21121879",
-                 "Мао Дзедун -> 26121893", "Джордж Буш -> 12061924", "Пиночет -> 25111915", "Че Гевара -> 14061928"
+                "Мао Дзедун -> 26121893", "Джордж Буш -> 12061924", "Пиночет -> 25111915", "Че Гевара -> 14061928", "Пётр I -> 09061672", "Екатерина II -> 02051729", "Путин -> 07101952", "Гитлер -> 20041889",
+                "Ангела Меркель -> 17071954", "Маргарет Тетчер -> 13101925", "Мадонна -> 16081958", "Индира Ганди -> 19111917", "Мата Хари -> 07081876"
             )
         )
     }
@@ -380,7 +381,7 @@ class MainActivity : AppCompatActivity() {
         msg.create().show()
     }
 
-// Показать диалог со списком дат
+    // Показать диалог со списком дат
     private fun msgLoadList(list: Array<String>) {
         val positiveButtonClick = { _: DialogInterface, _: Int -> toast("Отмена") }
         val builder = AlertDialog.Builder(this)
@@ -395,7 +396,7 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
-//показать диалог с editText для ввода имени для сохранения
+    //показать диалог с editText для ввода имени для сохранения
     private fun msgEnterText(txtTitle: String, txtHint: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(txtTitle)
