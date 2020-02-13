@@ -12,16 +12,20 @@
         <activity
             android:name="com.SAMsoft.kvadratpifagora.ActivitySearch"
             android:label="@string/Srch"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="com.SAMsoft.kvadratpifagora.ActivityFullDescr"
             android:label="@string/FullDescript"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.SAMsoft.kvadratpifagora.ActivityBrak"
             android:label="@string/sovmBrak"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.SAMsoft.kvadratpifagora.MainActivity">
+        <activity android:name="com.SAMsoft.kvadratpifagora.MainActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -242,31 +242,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     //Меняем подписи текста и кнопок на стандартные, если дата неправильная
                 } else {
-                    btn1.text = "1"
-                    btn2.text = "2"
-                    btn3.text = "3"
-                    btn4.text = "4"
-                    btn5.text = "5"
-                    btn6.text = "6"
-                    btn7.text = "7"
-                    btn8.text = "8"
-                    btn9.text = "9"
-                    btnSave.isEnabled = false
-                    txtText.text = ""
-                    txtStolb1.text = "-"
-                    txtStolb2.text = "-"
-                    txtStolb3.text = "-"
-                    txtStroka1.text = "-"
-                    txtStroka2.text = "-"
-                    txtStroka3.text = "-"
-                    txtDuhovnayaDiagonal.text = "-"
-                    txtPlotskayaDiagonal.text = "-"
-                    txtVoploshenie.text = "-"
-                    txtChislo1.text = "-"
-                    txtChislo2.text = "-"
-                    txtChislo3.text = "-"
-                    txtChislo4.text = "-"
 
+                    txtReset()
                 }
             }
 
@@ -281,6 +258,32 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun txtReset() {
+        btn1.text = "1"
+        btn2.text = "2"
+        btn3.text = "3"
+        btn4.text = "4"
+        btn5.text = "5"
+        btn6.text = "6"
+        btn7.text = "7"
+        btn8.text = "8"
+        btn9.text = "9"
+        btnSave.isEnabled = false
+        txtText.text = ""
+        txtStolb1.text = "-"
+        txtStolb2.text = "-"
+        txtStolb3.text = "-"
+        txtStroka1.text = "-"
+        txtStroka2.text = "-"
+        txtStroka3.text = "-"
+        txtDuhovnayaDiagonal.text = "-"
+        txtPlotskayaDiagonal.text = "-"
+        txtVoploshenie.text = "-"
+        txtChislo1.text = "-"
+        txtChislo2.text = "-"
+        txtChislo3.text = "-"
+        txtChislo4.text = "-"
+    }
 
     //Обрабатывает клики по TextView
     fun txtClick(view: View) {
@@ -355,7 +358,7 @@ class MainActivity : AppCompatActivity() {
             return (file.readText()) // Read file
 
         } catch (t: Throwable) {
-            toast("Exception: $t")
+            // toast("Exception: $t")
         }
         return ""
     }
@@ -388,6 +391,7 @@ class MainActivity : AppCompatActivity() {
 
         builder.setTitle("Выберите дату").setItems(list) { _, which ->
             val lstItem = list[which].split(" -> ")
+            txtReset()
             txtBirthDay.setText(lstItem[1])
             toast(lstItem[0] + " -> " + lstItem[1])
         }
