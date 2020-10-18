@@ -19,11 +19,6 @@
         android:orderInCategory="100"
         android:title="@string/Srch"
         />
-    <item
-        android:id="@+id/mnu_separator"
-        android:orderInCategory="100"
-        android:title="___________________________"
-        />
 
     <item
         android:id="@+id/mnu_About"
