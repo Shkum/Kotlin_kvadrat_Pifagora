@@ -178,7 +178,7 @@ class ActivitySearch : AppCompatActivity() {
         }
     }
 
-// фкнкуия корутина, из которой вызывается дркгая корктина
+// функция корутина, из которой вызывается другая корктина
     private suspend fun updateUi() {
         strArr = emptyList()
         var adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, strArr)
@@ -281,11 +281,11 @@ class ActivitySearch : AppCompatActivity() {
     }
 
     //Прогресс поиска в %
-    private fun calcStatus(startdate: String, enddate: String, currentdate: String): String {
+    private fun calcStatus(startDate: String, endDate: String, currentDate: String): String {
         val sdf = SimpleDateFormat("dd.MM.yyyy")
-        val dte1: Date = sdf.parse(startdate)
-        val dte2: Date = sdf.parse(enddate)
-        val dte3: Date = sdf.parse(currentdate)
+        val dte1: Date = sdf.parse(startDate)
+        val dte2: Date = sdf.parse(endDate)
+        val dte3: Date = sdf.parse(currentDate)
         val dateDiff: Long = ((dte2.time - dte1.time) / 60 / 60 / 24 / 1000)
         val dateDiffCurrent: Long = ((dte2.time - dte3.time) / 60 / 60 / 24 / 1000)
         var result: Double = (dateDiff.toDouble() - dateDiffCurrent.toDouble()) / dateDiff.toDouble()
